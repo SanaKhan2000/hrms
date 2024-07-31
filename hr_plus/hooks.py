@@ -1,5 +1,5 @@
 app_name = "hr_plus"
-app_title = "hr plus"
+app_title = "Hr Plus"
 app_publisher = "hr_plus"
 app_description = "hr plus"
 app_email = "hr_plus@gmail.com"
@@ -23,6 +23,12 @@ app_license = "mit"
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
 # webform_include_css = {"doctype": "public/css/doctype.css"}
+# doctype_js = {
+#     "Attendance" : "public/js/attendance_calender.js",
+# }
+# doctype_calendar_js = {"Attendance" : "public/js/attendance/attendance_calender_test.js"}
+
+
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
@@ -121,6 +127,12 @@ app_license = "mit"
 # Document Events
 # ---------------
 # Hook on document methods and events
+# doc_events = {
+#     "Attendance": {
+#         "get_events_method": "hr_plus.attendance.doctype.attendance.attendance.get_attendance_events"
+#     }
+# }
+
 
 # doc_events = {
 # 	"*": {

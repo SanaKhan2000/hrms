@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Calendar</title>
+</head>
+<body>
+    <div class="calendar">
+        <div class="header">
+            <button id="prev">&lt;</button>
+            <h2 id="month-year">{{ current_month }} {{ current_year }}</h2>
+            <button id="next">&gt;</button>
+        </div>
+        <div class="days">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="dates" id="dates">
+            {% for week in calendar %}
+                {% for day in week %}
+                    <div class="date {% if day.status %}{{ day.status|lower }}{% endif %}">
+                        <span>{{ day.day }}</span><br>
+                        {% if day.status %}
+                            {{ day.status }}<br>
+                            {{ day.in_time }} - {{ day.out_time }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
