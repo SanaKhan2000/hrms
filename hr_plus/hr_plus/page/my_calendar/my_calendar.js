@@ -44,7 +44,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
            #event-details-card {
                display: none;
                padding: 10px;
-               border: 1px solid #2c3e50;
+               
                border-radius: 5px;
                background-color: #f9f9f9;
                margin-top: 10px;
@@ -436,7 +436,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                         // Store the selected employee for future use
                                         var employeeFilter = values.employee;
                                         console.log(employeeFilter);
-    
+                    
                                         // Refetch events with the selected employee filter
                                         calendar.setOption('events', function(fetchInfo, successCallback, failureCallback) {
                                             frappe.call({
@@ -477,14 +477,14 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                                                     backgroundColor = 'red';
                                                                     borderColor = backgroundColor;
                                                             }
-    
+                    
                                                             var inTime, outTime, durationString;
                                                             if (event.in_time && event.out_time) {
                                                                 inTime = new Date(event.in_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                                                 outTime = new Date(event.out_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                                                 durationString = inTime + " to " + outTime;
                                                             }
-    
+                    
                                                             // Create the events list in the desired order
                                                             var eventList = [
                                                                 {
@@ -496,7 +496,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                                                     extendedProps: { employee: event.employee, in_time: event.in_time, out_time: event.out_time, late_entry: event.late_entry, early_exit: event.early_exit, leave_type: event.leave_type, attendance_request: event.attendance_request, reason: event.reason }
                                                                 }
                                                             ];
-    
+                    
                                                             return eventList;
                                                         });
                                                         console.log(events);
@@ -507,7 +507,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                                 }
                                             });
                                         });
-    
+                    
                                         calendar.refetchEvents();
                                     },
                                     'Filter Events',
@@ -557,14 +557,14 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                                     backgroundColor = 'red';
                                                     borderColor = backgroundColor;
                                             }
-    
+                    
                                             var inTime, outTime, durationString;
                                             if (event.in_time && event.out_time) {
                                                 inTime = new Date(event.in_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                                 outTime = new Date(event.out_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                                                 durationString = inTime + " to " + outTime;
                                             }
-    
+                    
                                             // Create the events list in the desired order
                                             var eventList = [
                                                 {
@@ -576,7 +576,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                                                     extendedProps: { employee: event.employee, in_time: event.in_time, out_time: event.out_time, late_entry: event.late_entry, early_exit: event.early_exit, leave_type: event.leave_type, attendance_request: event.attendance_request, reason: event.reason }
                                                 }
                                             ];
-    
+                    
                                             return eventList;
                                         });
                                         console.log(events);
@@ -591,7 +591,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                             if (info.event.extendedProps.status) {
                                 info.el.style.backgroundColor = 'white';
                             }
-    
+                    
                             // Change color of dot marker
                             var dotEl = info.el.getElementsByClassName('fc-event-dot')[0];
                             if (dotEl) {
@@ -599,18 +599,21 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                             }
                         },
                         eventClick: function(info) {
-                            // Toggle popover on event click
-                            if (info.event.title.startsWith('FCP: ')) {
-                                $(info.el).popover('toggle');
-                            }
-    
-                            // Mobile view logic: Show event details in a card below the calendar
                             var eventDetailsCard = $('#event-details-card');
                             var event = info.event;
-                            if (event.start) {
-                            var content = `<h4><strong>Date:</strong> ${event.start.toLocaleDateString()}</h4>`;
-                            }
-                            
+                        
+                            // Format the date as (Sat, 19 Jan)
+                            var options = { weekday: 'short', day: 'numeric', month: 'short' };
+                            var formattedDate = event.start.toLocaleDateString(undefined, options);
+                        
+                            // Display the date in a separate card
+                            var dateContent = `<div style=" border-radius: 5px; margin-bottom: 10px;">
+                                                    <h4> ${formattedDate}</h4>
+                                               </div>`;
+                        
+                            // Display the event details in another card
+                            var content = '';
+                        
                             if (event.title) {
                                 content += `<p><strong>Status:</strong> ${event.title}</p>`;
                             }
@@ -629,12 +632,14 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                             if (event.extendedProps.reason) {
                                 content += `<p><strong>Reason:</strong> ${event.extendedProps.reason}</p>`;
                             }
-    
-                            // Set the card's background color to match the event's background color
-                            eventDetailsCard.css('background-color', info.el.style.backgroundColor);
-    
-                            eventDetailsCard.html(content).show();
+                        
+                            // Combine the date and event details content
+                            var combinedContent = dateContent + `<div style="background-color: ${info.el.style.backgroundColor}; padding: 10px; border-radius: 5px;">` + content + '</div>';
+                        
+                            eventDetailsCard.html(combinedContent).show();
                         },
+                        
+                        
                         eventDrop: function(info) {
                             frappe.call({
                                 method: "hr_plus.api.move_event",
@@ -649,6 +654,9 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
                             });
                         }
                     });
+                    
+                   
+                    
             }
 
                 calendar.render();

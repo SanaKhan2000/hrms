@@ -5,9 +5,11 @@ def get_calendar_events(start_date, end_date, employee=None):
     # Get the current logged-in user
     current_user = frappe.session.user
 
-    hr_role = frappe.db.get_value('HR Plus Settings','hr_plus_role')
-    # Check if the user has the 'HR Manager' role
-    is_hr_manager = frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role })
+    # Fetch the HR role from HR Plus Settings
+    hr_role = frappe.db.get_value('HR Plus Settings', None, 'hr_plus_role')
+    
+    # Check if the user has the specified HR role
+    is_hr_manager = frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
     
     # Prepare filters for fetching events
     filters = {'attendance_date': ['between', [start_date, end_date]]}
@@ -52,4 +54,6 @@ def get_calendar_events(start_date, end_date, employee=None):
 @frappe.whitelist()
 def is_hr_manager():
     current_user = frappe.session.user
-    return frappe.db.exists('Has Role', {'parent': current_user, 'role': 'HR Manager'})
+    # Fetch the HR role from HR Plus Settings
+    hr_role = frappe.db.get_value('HR Plus Settings', None, 'hr_plus_role')
+    return frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
