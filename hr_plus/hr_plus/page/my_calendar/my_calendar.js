@@ -141,7 +141,7 @@ frappe.pages['my-calendar'].on_page_load = function(wrapper) {
         type: 'text/css',
         html: customStyles
     }).appendTo('head');
-
+    //To fetch data according to filter
     frappe.call({  
         method: "hr_plus.hr_plus.page.my_calendar.my_calendar.is_hr_manager",
         callback: function(r) {
