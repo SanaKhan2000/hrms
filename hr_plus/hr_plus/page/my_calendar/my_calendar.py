@@ -2,51 +2,57 @@ import frappe
 
 @frappe.whitelist()
 def get_calendar_events(start_date, end_date, employee=None):
-    # Get the current logged-in user
     current_user = frappe.session.user
-
-    # Fetch the HR role from HR Plus Settings
     hr_role = frappe.db.get_value('HR Plus Settings', None, 'hr_plus_role')
-    
-    # Check if the user has the specified HR role
     is_hr_manager = frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
     
-    # Prepare filters for fetching events
     filters = {'attendance_date': ['between', [start_date, end_date]]}
     
-    # If the user is not an HR Manager, add the employee filter
     if not is_hr_manager:
-        # Fetch the employee linked to the current logged-in user
         employee = frappe.db.get_value('Employee', {'user_id': current_user}, 'name')
         if not employee:
             return []
         filters['employee'] = employee
     else:
-        # Apply the employee filter if provided and user is an HR Manager
         if employee:
             filters['employee'] = employee
 
-    # Fetch events within the given date range, applying filters based on user role
+    # Fetch attendance events within the given date range including the document name
     events = frappe.db.get_list('Attendance', 
         filters=filters,
-        fields=["status", "in_time", "out_time", "attendance_date", "employee", "attendance_request", "late_entry", "early_exit", "leave_type"]
+        fields=["name", "status", "in_time", "out_time", "attendance_date", "employee", "attendance_request", "late_entry", "early_exit", "leave_type"]
     )
+    
+    holiday_list = frappe.db.get_value('Employee', {'user_id': current_user}, 'holiday_list')
 
-    # Create a list to store the modified events with the reason field
+    if holiday_list:
+        holidays = frappe.get_all('Holiday', 
+            filters={'parent': holiday_list}, 
+            fields=['holiday_date', 'public_holiday_']
+        )
+
+        for holiday in holidays:
+            if holiday.get('public_holiday_'):
+                events.append({
+                    'attendance_date': holiday['holiday_date'],
+                    'status': 'Holiday',
+                    'public_holiday_': holiday['public_holiday_'],
+                    'employee': employee,
+                    'in_time': None,
+                    'out_time': None,
+                    'name': None  # Holidays do not have an Attendance record
+                })
+
     modified_events = []
-
     for event in events:
-        # Initialize the reason as an empty string
         reason = ''
-
         if event.get('attendance_request'):
-            # Fetch the reason from the Attendance Request doctype
             reason = frappe.db.get_value('Attendance Request', event['attendance_request'], 'reason')
-
-        # Add the reason to the event dictionary
         event['reason'] = reason
 
-        # Append the modified event to the list
+        if event.get('status') == 'Holiday':
+            event['title'] = 'Holiday: ' + (event.get('public_holiday_') or '')
+
         modified_events.append(event)
 
     return modified_events
