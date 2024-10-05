@@ -6,7 +6,7 @@ def get_calendar_events(start_date, end_date, employee=None):
     hr_role = frappe.db.get_value('HR Plus Settings', None, 'hr_plus_role')
     is_hr_manager = frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
     
-    filters = {'attendance_date': ['between', [start_date, end_date]]}
+    filters = {'attendance_date': ['between', [start_date, end_date]], 'docstatus': 1}
     
     if not is_hr_manager:
         employee = frappe.db.get_value('Employee', {'user_id': current_user}, 'name')
@@ -46,9 +46,13 @@ def get_calendar_events(start_date, end_date, employee=None):
     modified_events = []
     for event in events:
         reason = ''
+        workflow_state = ''
         if event.get('attendance_request'):
             reason = frappe.db.get_value('Attendance Request', event['attendance_request'], 'reason')
+            workflow_state = frappe.db.get_value('Attendance Request', event['attendance_request'], 'workflow_state')
+        
         event['reason'] = reason
+        event['workflow_state'] = workflow_state
 
         if event.get('status') == 'Holiday':
             event['title'] = 'Holiday: ' + (event.get('public_holiday_') or '')
@@ -62,4 +66,13 @@ def is_hr_manager():
     current_user = frappe.session.user
     # Fetch the HR role from HR Plus Settings
     hr_role = frappe.db.get_value('HR Plus Settings', None, 'hr_plus_role')
-    return frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
+    # Fetch the user's theme preference
+    desk_theme = frappe.db.get_value('User', current_user, 'desk_theme')
+    is_manager = frappe.db.exists('Has Role', {'parent': current_user, 'role': hr_role})
+    # Return both HR manager status and desk theme
+    return {
+        'is_hr_manager': is_manager,
+        'desk_theme': desk_theme
+    }
+
+
