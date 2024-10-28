@@ -1,53 +1,42 @@
-# My Calendar
+# My Calendar Feature for HR Plus
 
-The `My Calendar` feature is an interactive, customizable calendar view built for managing attendance, leave, and other events within the ERPNext framework. This calendar is part of the `hrms` module and designed for both desktop and mobile viewing, with adaptability to Light and Dark themes.
+This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms) module, provides a user-friendly, interactive calendar tailored for tracking and managing employee attendance.
 
-## Features
+## Key Features
 
-- **Customizable View**: 
-  - Display event details such as attendance status, holidays, leave types, and special events with color-coded highlights.
-  - Fridays are visually distinguished for easy week planning.
+- **Event-based Attendance Management**: Displays employee attendance status directly on the calendar, color-coded by status, for a quick overview of attendance patterns.
+  
+- **Dynamic Event Interaction**: Click on an event to directly open the associated **Attendance** document in ERPNext, making attendance management more streamlined and intuitive.
 
-- **Dynamic Theme Support**:
-  - The calendar adapts to the current user theme (Light or Dark) and detects theme changes in real time, updating without needing a page reload.
+- **Employee-specific Filtering**: HR Managers can filter the calendar by employee, with the page title and calendar events updating dynamically to reflect the selected employee’s attendance.
 
-- **Employee Filter**:
-  - A "Filter" button allows users to view the calendar based on specific employee records, updating the calendar title and events accordingly.
+- **Customizable Theme**: Adapts automatically to Light and Dark modes, providing consistent styling aligned with the user's theme preferences in ERPNext.
 
-- **Mobile Optimization**:
-  - Layouts, font sizes, and event styles adjust automatically to fit mobile devices, ensuring a seamless experience across different screen sizes.
+- **Mobile-friendly Design**: Optimized for both desktop and mobile devices, with special styling for easier navigation and event visibility on smaller screens.
 
-- **Interactive Events**:
-  - Events display detailed pop-up information on hover or click, including in-time, out-time, and custom labels like "Late Entry" or "Early Exit."
-  - For events with specific actions, such as "Attendance Request," clicking the event directs users to relevant documents or workflows.
-
-- **Event Details Card**:
-  - A styled card displays date, time, and status details for selected events, enhancing readability and interaction.
-
-## Installation
-
-1. Ensure `FullCalendar` is loaded within your project, as this library is essential for the calendar’s functionality.
-2. Import or reference the `my_calendar.js` file within your `hr plus` module.
-3. Verify access to employee and attendance data to enable filtering and event display.
+- **Real-time Theme Detection**: Detects theme changes and refreshes the calendar to match the selected theme, maintaining visual consistency across ERPNext.
 
 ## Usage
 
-- **Theme Settings**: Adjust your ERPNext theme settings to see dynamic updates based on Light or Dark themes.
-- **Filtering Events**: Use the "Filter" button on the calendar toolbar to select an employee, refining the calendar display to show only relevant events.
-- **Event Interaction**: Click on any event to view detailed information in the event card or to be redirected to the relevant ERPNext document.
+1. **Accessing the Calendar**:
+   - Go to `My Calendar` under the HR Plus module in ERPNext.
 
-## Screenshots
+2. **Filtering by Employee**:
+   - Click on the "Filter" button to select an employee. The calendar will reload to display the selected employee's attendance events.
 
+3. **Event Interaction**:
+   - Hover over events for a quick preview of attendance details.
+   - Click on any event to navigate directly to the **Attendance** document, where you can review or update attendance information.
 
-## Troubleshooting
+## Installation
 
-- **Theme Update Issues**: If theme updates are not reflected, ensure that the theme change detection function is active.
-- **Event Filtering**: Ensure employees have recorded attendance data to enable meaningful filtering results.
+This feature is part of the **HR Plus** module in Frappe/ERPNext and can be accessed from the HR module in the system. Ensure the latest version of HR Plus is installed in your ERPNext environment.
 
 ## Contributing
 
-Contributions are welcome! Please follow the repository guidelines and submit a pull request for review.
+Contributions are welcome! If you encounter issues or have suggestions for improvement, please submit an issue or pull request on the [GitHub repository](https://github.com/frappe/hrms).
 
 ## License
 
-This project is licensed under the MIT License.
+This feature is licensed under the MIT License.
+
