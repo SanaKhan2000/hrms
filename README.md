@@ -1,8 +1,6 @@
 # My Calendar
 
-The `My Calendar` feature is an interactive calendar tool designed for efficient attendance and event tracking within ERPNext. It provides users with a clean, customizable view of attendance, holidays, leaves, and other work-related events. By integrating with ERPNext’s `hr plus` module, `My Calendar` enhances workforce management by offering daily, weekly, and monthly views tailored to employee schedules, with theme adaptability and mobile optimization for convenient access across devices.
-
-This calendar supports various color-coded statuses, such as "Present," "Holiday," "On Leave," and "Work from Home," ensuring quick visual recognition of each day’s status. The tool also enables filtering by employees, interactive event details, and theme adaptation, making it ideal for HR managers and team leads seeking an organized and accessible way to track team availability.
+The `My Calendar` feature is an interactive, customizable calendar view built for managing attendance, leave, and other events within the ERPNext framework. This calendar is part of the `hrms` module and designed for both desktop and mobile viewing, with adaptability to Light and Dark themes.
 
 ## Features
 
@@ -11,7 +9,7 @@ This calendar supports various color-coded statuses, such as "Present," "Holiday
   - Fridays are visually distinguished for easy week planning.
 
 - **Dynamic Theme Support**:
-  - The calendar adapts to the current user theme (Light or Dark) and detects theme changes in real-time, updating without needing a page reload.
+  - The calendar adapts to the current user theme (Light or Dark) and detects theme changes in real time, updating without needing a page reload.
 
 - **Employee Filter**:
   - A "Filter" button allows users to view the calendar based on specific employee records, updating the calendar title and events accordingly.
@@ -40,11 +38,6 @@ This calendar supports various color-coded statuses, such as "Present," "Holiday
 
 ## Screenshots
 
-### Desktop View
-![Desktop View](./path/to/Screenshot_from_2024-10-28_16-32-02.png)
-
-### Mobile View
-![Mobile View](./path/to/Screenshot_from_2024-10-28_16-36-19.png)
 
 ## Troubleshooting
 
