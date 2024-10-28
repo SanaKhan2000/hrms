@@ -27,6 +27,8 @@ This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms)
 3. **Event Interaction**:
    - Hover over events for a quick preview of attendance details.
    - Click on any event to navigate directly to the **Attendance** document, where you can review or update attendance information.
+##
+![Screenshot from 2024-10-28 16-32-02](https://github.com/user-attachments/assets/ffeaa0c5-7cc7-47c5-b142-04a22a0e8c55)
 
 ## Installation
 
