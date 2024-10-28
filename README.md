@@ -15,6 +15,15 @@ This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms)
 - **Mobile-friendly Design**: Optimized for both desktop and mobile devices, with special styling for easier navigation and event visibility on smaller screens.
 
 - **Real-time Theme Detection**: Detects theme changes and refreshes the calendar to match the selected theme, maintaining visual consistency across ERPNext.
+- 
+## Screenshots
+
+### Desktop View
+![Desktop View]![Screenshot from 2024-10-28 16-32-02](https://github.com/user-attachments/assets/ffeaa0c5-7cc7-47c5-b142-04a22a0e8c55)
+
+### Mobile View
+![Mobile View]![Screenshot from 2024-10-28 17-25-27](https://github.com/user-attachments/assets/2bd2b14b-2be9-488c-a553-6c4f1901182e)
+
 
 ## Usage
 
@@ -27,8 +36,6 @@ This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms)
 3. **Event Interaction**:
    - Hover over events for a quick preview of attendance details.
    - Click on any event to navigate directly to the **Attendance** document, where you can review or update attendance information.
-##
-![Screenshot from 2024-10-28 16-32-02](https://github.com/user-attachments/assets/ffeaa0c5-7cc7-47c5-b142-04a22a0e8c55)
 
 ## Installation
 
