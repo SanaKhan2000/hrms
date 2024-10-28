@@ -19,10 +19,10 @@ This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms)
 ## Screenshots
 
 ### Desktop View
-[Screenshot from 2024-10-28 16-32-02](https://github.com/user-attachments/assets/ffeaa0c5-7cc7-47c5-b142-04a22a0e8c55)
+![Screenshot from 2024-10-28 16-32-02](https://github.com/user-attachments/assets/e54941d9-736e-4097-af8c-f0b12fd2aeed)
 
 ### Mobile View
-[Screenshot from 2024-10-28 17-25-27](https://github.com/user-attachments/assets/2bd2b14b-2be9-488c-a553-6c4f1901182e)
+![Screenshot from 2024-10-28 17-25-27](https://github.com/user-attachments/assets/214c3d32-3829-4e3a-9a1b-328f19a45f78)
 
 
 ## Usage
