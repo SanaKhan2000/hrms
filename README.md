@@ -32,9 +32,6 @@ This calendar feature, part of the [Frappe HRMS](https://github.com/frappe/hrms)
 
 This feature is part of the **HR Plus** module in Frappe/ERPNext and can be accessed from the HR module in the system. Ensure the latest version of HR Plus is installed in your ERPNext environment.
 
-## Contributing
-
-Contributions are welcome! If you encounter issues or have suggestions for improvement, please submit an issue or pull request on the [GitHub repository](https://github.com/frappe/hrms).
 
 ## License
 
